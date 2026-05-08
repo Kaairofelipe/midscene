@@ -1,11 +1,6 @@
+import { useLocale } from '../../i18n';
 import { useStudioTheme } from '../../theme/ThemeProvider';
 import SettingItem from './SettingItem';
-
-const THEME_LABELS: Record<string, string> = {
-  light: 'Light',
-  dark: 'Dark',
-  system: 'System',
-};
 
 function ChevronIcon() {
   return (
@@ -61,24 +56,20 @@ function ExternalLinkIcon() {
 
 export interface SettingsPanelProps {
   className?: string;
-  language?: string;
   onEnvConfigClick?: () => void;
   onGithubClick?: () => void;
-  onLanguageClick?: () => void;
-  onThemeClick?: () => void;
   onWebsiteClick?: () => void;
 }
 
 export default function SettingsPanel({
   className,
-  language = 'English',
   onEnvConfigClick,
   onGithubClick,
-  onLanguageClick,
-  onThemeClick,
   onWebsiteClick,
 }: SettingsPanelProps) {
   const { mode, cycleMode } = useStudioTheme();
+  const { t, cycleLocale, localeLabel } = useLocale();
+  const themeLabel = t(`settings.themes.${mode}` as const);
   const panelClassName = [
     'flex h-[220px] w-[244px] flex-col overflow-hidden rounded-[12px] border border-border-subtle bg-surface-elevated p-[6px] shadow-lg',
     className,
@@ -90,16 +81,16 @@ export default function SettingsPanel({
     <div className={panelClassName}>
       <div className="flex flex-col">
         <SettingItem
-          label="Language"
-          onClick={onLanguageClick}
+          label={t('settings.language')}
+          onClick={cycleLocale}
           trailingIcon={<ChevronIcon />}
-          value={language}
+          value={localeLabel}
         />
         <SettingItem
-          label="Theme"
+          label={t('settings.theme')}
           onClick={cycleMode}
           trailingIcon={<ChevronIcon />}
-          value={THEME_LABELS[mode]}
+          value={themeLabel}
         />
       </div>
 
@@ -107,12 +98,12 @@ export default function SettingsPanel({
 
       <div className="flex flex-col">
         <SettingItem
-          label="GitHub"
+          label={t('common.github')}
           onClick={onGithubClick}
           trailingIcon={<ExternalLinkIcon />}
         />
         <SettingItem
-          label="Website"
+          label={t('common.website')}
           onClick={onWebsiteClick}
           trailingIcon={<ExternalLinkIcon />}
         />
@@ -122,7 +113,7 @@ export default function SettingsPanel({
 
       <div className="flex flex-col">
         <SettingItem
-          label="Environment"
+          label={t('settings.environment')}
           onClick={onEnvConfigClick}
           trailingIcon={<ChevronIcon />}
         />

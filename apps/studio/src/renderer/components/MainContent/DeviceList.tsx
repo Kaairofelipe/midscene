@@ -1,4 +1,5 @@
 import { assetUrls } from '../../assets';
+import { type TranslationKey, useT } from '../../i18n';
 import type {
   StudioAndroidDeviceItem,
   StudioSidebarDeviceBuckets,
@@ -10,15 +11,35 @@ type DeviceConnectionState = 'idle' | 'live' | 'connecting';
 interface PlatformConfig {
   iconSrc?: string;
   key: StudioSidebarPlatformKey;
-  label: string;
+  labelKey: TranslationKey;
 }
 
 const PLATFORM_CONFIGS: PlatformConfig[] = [
-  { iconSrc: assetUrls.device.android, key: 'android', label: 'Android' },
-  { iconSrc: assetUrls.device.ios, key: 'ios', label: 'iOS' },
-  { iconSrc: assetUrls.device.computer, key: 'computer', label: 'Computer' },
-  { iconSrc: assetUrls.device.harmony, key: 'harmony', label: 'HarmonyOS' },
-  { iconSrc: assetUrls.device.web, key: 'web', label: 'Web' },
+  {
+    iconSrc: assetUrls.device.android,
+    key: 'android',
+    labelKey: 'device.platforms.android',
+  },
+  {
+    iconSrc: assetUrls.device.ios,
+    key: 'ios',
+    labelKey: 'device.platforms.ios',
+  },
+  {
+    iconSrc: assetUrls.device.computer,
+    key: 'computer',
+    labelKey: 'device.platforms.computer',
+  },
+  {
+    iconSrc: assetUrls.device.harmony,
+    key: 'harmony',
+    labelKey: 'device.platforms.harmonyos',
+  },
+  {
+    iconSrc: assetUrls.device.web,
+    key: 'web',
+    labelKey: 'device.platforms.web',
+  },
 ];
 
 function LinkIcon() {
@@ -81,6 +102,7 @@ function SpinnerIcon() {
 }
 
 function StatusBadge({ status }: { status: DeviceConnectionState }) {
+  const t = useT();
   if (status === 'idle') {
     return null;
   }
@@ -101,7 +123,7 @@ function StatusBadge({ status }: { status: DeviceConnectionState }) {
           isLive ? 'text-status-success-fg' : 'text-status-info'
         }`}
       >
-        {isLive ? 'Live' : 'Connecting'}
+        {isLive ? t('device.status.live') : t('device.status.connecting')}
       </span>
     </div>
   );
@@ -180,8 +202,10 @@ export function DeviceList({
   connectingDeviceId,
   onConnect,
 }: DeviceListProps) {
+  const t = useT();
   const sections = PLATFORM_CONFIGS.map((config) => ({
     ...config,
+    label: t(config.labelKey),
     devices: buckets[config.key],
   }));
 
@@ -194,7 +218,7 @@ export function DeviceList({
           </span>
           {section.devices.length === 0 ? (
             <div className="flex h-[66px] w-[394px] items-center justify-center rounded-[16px] border border-dashed border-border-subtle font-sans text-[12px] text-text-tertiary">
-              No devices
+              {t('sidebar.noDevices')}
             </div>
           ) : (
             <div className="flex w-[800px] flex-wrap gap-[12px]">

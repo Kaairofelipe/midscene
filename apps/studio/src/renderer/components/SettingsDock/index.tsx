@@ -1,4 +1,5 @@
 import { assetUrls } from '../../assets';
+import { useT } from '../../i18n';
 
 function ChevronRight() {
   return (
@@ -51,6 +52,7 @@ export default function SettingsDock({
   onToggleSettings,
   settingsOpen,
 }: SettingsDockProps) {
+  const t = useT();
   return (
     <div className="flex h-[32px] items-center justify-between gap-[6px]">
       <button
@@ -69,12 +71,12 @@ export default function SettingsDock({
           src={assetUrls.sidebar.settings}
         />
         <span className="ml-[6px] overflow-hidden whitespace-nowrap font-sans text-[13px] leading-[22px] text-text-secondary">
-          Settings
+          {t('settings.settings')}
         </span>
       </button>
 
       <div className="flex items-center gap-[4px]">
-        <ActionChip label="Env" onClick={onEnvClick} />
+        <ActionChip label={t('settings.env')} onClick={onEnvClick} />
       </div>
     </div>
   );
