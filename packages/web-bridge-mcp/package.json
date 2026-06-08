@@ -25,7 +25,7 @@
     "dotenv": "^16.4.5",
     "puppeteer-core": "24.6.0",
     "typescript": "^5.8.3",
-    "vitest": "3.0.5"
+    "vitest": "3.2.6"
   },
   "dependencies": {
     "@silvia-odwyer/photon": "0.3.3",
