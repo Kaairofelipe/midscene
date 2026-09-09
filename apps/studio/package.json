@@ -47,7 +47,7 @@
     "@types/react": "^18.3.1",
     "@types/react-dom": "^18.3.1",
     "concurrently": "^8.2.0",
-    "electron": "41.2.0",
+    "electron": "41.10.3",
     "jsdom": "29.0.2",
     "less": "^4.2.0",
     "tailwindcss": "4.1.11",
