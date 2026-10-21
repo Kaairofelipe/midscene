@@ -51,7 +51,7 @@
     "rsbuild-plugin-workspace-dev": "0.0.1",
     "tailwindcss": "4.1.11",
     "typescript": "^5.8.3",
-    "vitest": "3.0.5",
+    "vitest": "4.1.11",
     "web-ext": "9.0.0"
   }
 }
