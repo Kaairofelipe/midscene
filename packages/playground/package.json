@@ -42,7 +42,7 @@
     "@types/node": "^18.0.0",
     "@types/uuid": "10.0.0",
     "typescript": "^5.8.3",
-    "vitest": "3.0.5"
+    "vitest": "4.1.11"
   },
   "publishConfig": {
     "access": "public"
